@@ -1,0 +1,389 @@
+/* =========================================================
+   AI Woo assistance — Frontend Widget Styles
+   ========================================================= */
+
+/* --- CSS custom properties -------------------------------- */
+#aia-widget {
+    --aia-primary:      #635bff;
+    --aia-primary-dark: #4d43d8;
+    --aia-primary-glow: rgba(99,91,255,.22);
+    --aia-ink:          #1a1b25;
+    --aia-muted:        #6b7280;
+    --aia-bg:           #f5f5fb;
+    --aia-white:        #ffffff;
+    --aia-border:       rgba(31,35,44,.10);
+    --aia-radius-lg:    20px;
+    --aia-radius-md:    14px;
+    --aia-radius-sm:    10px;
+    --aia-shadow:       0 20px 60px rgba(31,35,44,.18), 0 4px 16px rgba(99,91,255,.08);
+    font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    position: fixed;
+    right: 24px;
+    bottom: 24px;
+    z-index: 99999;
+}
+
+/* --- Toggle bubble ---------------------------------------- */
+#aia-toggle {
+    width: 60px;
+    height: 60px;
+    border: 0;
+    border-radius: 50%;
+    background: linear-gradient(145deg, #7c74ff, var(--aia-primary-dark));
+    color: #fff;
+    font-size: 26px;
+    line-height: 1;
+    cursor: pointer;
+    box-shadow: 0 8px 24px var(--aia-primary-glow), 0 2px 8px rgba(0,0,0,.12);
+    transition: transform .2s ease, box-shadow .2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+#aia-toggle:hover {
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 14px 30px var(--aia-primary-glow), 0 4px 12px rgba(0,0,0,.14);
+}
+#aia-toggle:active {
+    transform: scale(.97);
+}
+/* Unread badge — shown via JS when bot sends first greeting */
+#aia-toggle .aia-badge {
+    position: absolute;
+    top: -4px;
+    right: -4px;
+    width: 18px;
+    height: 18px;
+    background: #ef4444;
+    border-radius: 50%;
+    border: 2px solid #fff;
+    font-size: 10px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    display: none;
+}
+
+/* --- Chat window ------------------------------------------ */
+#aia-window {
+    position: absolute;
+    right: 0;
+    bottom: 76px;
+    width: 380px;
+    max-width: calc(100vw - 32px);
+    height: min(580px, calc(100vh - 120px));
+    background: var(--aia-white);
+    border: 1px solid var(--aia-border);
+    border-radius: var(--aia-radius-lg);
+    box-shadow: var(--aia-shadow);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    /* open / close animation */
+    transform-origin: bottom right;
+    animation: aia-pop-in .22s cubic-bezier(.34,1.56,.64,1) both;
+}
+@keyframes aia-pop-in {
+    from { opacity: 0; transform: scale(.88) translateY(12px); }
+    to   { opacity: 1; transform: scale(1)  translateY(0); }
+}
+
+/* --- Header ----------------------------------------------- */
+#aia-header {
+    padding: 16px 18px 15px;
+    background: linear-gradient(135deg, #685fff 0%, var(--aia-primary-dark) 100%);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-shrink: 0;
+}
+.aia-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: rgba(255,255,255,.18);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    flex-shrink: 0;
+    border: 2px solid rgba(255,255,255,.30);
+}
+.aia-header-info {
+    flex: 1;
+    min-width: 0;
+}
+.aia-header-title {
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: -.1px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.aia-status {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    margin-top: 3px;
+    color: rgba(255,255,255,.85);
+    font-size: 11.5px;
+    font-weight: 500;
+}
+.aia-status-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #35d07f;
+    flex-shrink: 0;
+    animation: aia-pulse 2.2s ease-in-out infinite;
+}
+@keyframes aia-pulse {
+    0%,100% { box-shadow: 0 0 0 0   rgba(53,208,127,.50); }
+    50%      { box-shadow: 0 0 0 5px rgba(53,208,127,.00); }
+}
+#aia-close {
+    background: rgba(255,255,255,.15);
+    border: 0;
+    border-radius: 8px;
+    color: #fff;
+    font-size: 18px;
+    line-height: 1;
+    width: 32px;
+    height: 32px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: background .15s;
+}
+#aia-close:hover {
+    background: rgba(255,255,255,.28);
+}
+
+/* --- Messages area ---------------------------------------- */
+#aia-messages {
+    flex: 1;
+    padding: 18px 16px;
+    overflow-y: auto;
+    background: var(--aia-bg);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    scroll-behavior: smooth;
+}
+/* Custom scrollbar */
+#aia-messages::-webkit-scrollbar { width: 4px; }
+#aia-messages::-webkit-scrollbar-track { background: transparent; }
+#aia-messages::-webkit-scrollbar-thumb { background: #d1d5db; border-radius: 4px; }
+
+/* --- Message rows ----------------------------------------- */
+.aia-row {
+    display: flex;
+    align-items: flex-end;
+    gap: 8px;
+    animation: aia-msg-in .18s ease both;
+}
+@keyframes aia-msg-in {
+    from { opacity: 0; transform: translateY(6px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+.aia-row.user {
+    flex-direction: row-reverse;
+}
+
+/* Bot avatar inside messages */
+.aia-msg-avatar {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #685fff, var(--aia-primary-dark));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    flex-shrink: 0;
+    color: #fff;
+    align-self: flex-end;
+    margin-bottom: 2px;
+}
+.aia-row.user .aia-msg-avatar {
+    background: #e5e7eb;
+    font-size: 13px;
+}
+
+/* Bubble */
+.aia-bubble {
+    max-width: 78%;
+    padding: 10px 13px;
+    border-radius: var(--aia-radius-md);
+    font-size: 13.5px;
+    line-height: 1.55;
+    word-wrap: break-word;
+    white-space: pre-wrap;
+}
+.aia-row.bot  .aia-bubble {
+    background: var(--aia-white);
+    color: var(--aia-ink);
+    border-bottom-left-radius: 4px;
+    box-shadow: 0 1px 3px rgba(0,0,0,.07);
+}
+.aia-row.user .aia-bubble {
+    background: linear-gradient(135deg, #7c74ff, var(--aia-primary-dark));
+    color: #fff;
+    border-bottom-right-radius: 4px;
+    margin-left: auto;
+}
+
+/* Inline links inside bot bubbles */
+.aia-bubble a {
+    color: var(--aia-primary);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+}
+.aia-row.user .aia-bubble a {
+    color: rgba(255,255,255,.9);
+}
+
+/* Bold / italic in bot bubbles */
+.aia-bubble strong { font-weight: 700; }
+.aia-bubble em     { font-style: italic; }
+
+/* Bullet list inside bot bubbles */
+.aia-bubble ul {
+    margin: 6px 0 0 0;
+    padding-left: 18px;
+    list-style: disc;
+}
+.aia-bubble ul li { margin: 3px 0; }
+
+/* --- Typing indicator ------------------------------------- */
+.aia-typing {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 10px 14px;
+    background: var(--aia-white);
+    border-radius: var(--aia-radius-md);
+    border-bottom-left-radius: 4px;
+    box-shadow: 0 1px 3px rgba(0,0,0,.07);
+    width: fit-content;
+}
+.aia-typing span {
+    display: block;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #9ca3af;
+    animation: aia-dot-bounce .9s ease-in-out infinite;
+}
+.aia-typing span:nth-child(2) { animation-delay: .15s; }
+.aia-typing span:nth-child(3) { animation-delay: .30s; }
+@keyframes aia-dot-bounce {
+    0%,80%,100% { transform: translateY(0);    background: #9ca3af; }
+    40%          { transform: translateY(-6px); background: var(--aia-primary); }
+}
+
+/* --- Date / system divider -------------------------------- */
+.aia-divider {
+    text-align: center;
+    font-size: 11px;
+    color: var(--aia-muted);
+    margin: 4px 0;
+    user-select: none;
+}
+
+/* --- Input row -------------------------------------------- */
+#aia-input-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 12px;
+    border-top: 1px solid #ebebf3;
+    background: var(--aia-white);
+    flex-shrink: 0;
+}
+#aia-input {
+    flex: 1;
+    min-width: 0;
+    border: 1.5px solid #e0e0ec;
+    border-radius: var(--aia-radius-sm);
+    padding: 10px 12px;
+    font: inherit;
+    font-size: 13.5px;
+    color: var(--aia-ink);
+    background: #fafafd;
+    outline: none;
+    transition: border-color .18s, box-shadow .18s, background .18s;
+    resize: none;
+}
+#aia-input::placeholder { color: #a0a0b8; }
+#aia-input:focus {
+    border-color: var(--aia-primary);
+    background: #fff;
+    box-shadow: 0 0 0 3px var(--aia-primary-glow);
+}
+#aia-input:disabled {
+    opacity: .55;
+    cursor: not-allowed;
+}
+#aia-send {
+    flex-shrink: 0;
+    width: 40px;
+    height: 40px;
+    border: 0;
+    border-radius: var(--aia-radius-sm);
+    background: linear-gradient(135deg, #7c74ff, var(--aia-primary-dark));
+    color: #fff;
+    font-size: 17px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform .15s, box-shadow .15s, background .15s;
+    box-shadow: 0 2px 8px var(--aia-primary-glow);
+}
+#aia-send:hover:not(:disabled) {
+    transform: scale(1.07);
+    box-shadow: 0 4px 14px var(--aia-primary-glow);
+}
+#aia-send:active:not(:disabled) {
+    transform: scale(.95);
+}
+#aia-send:disabled {
+    opacity: .45;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* Powered-by footer */
+#aia-footer {
+    text-align: center;
+    font-size: 10.5px;
+    color: #b0b0c8;
+    padding: 5px 0 7px;
+    background: var(--aia-white);
+    flex-shrink: 0;
+    border-top: 1px solid #f0f0f8;
+    user-select: none;
+}
+
+/* --- Responsive ------------------------------------------- */
+@media (max-width: 480px) {
+    #aia-widget {
+        right: 14px;
+        bottom: 14px;
+    }
+    #aia-window {
+        right: -6px;
+        bottom: 72px;
+        width: calc(100vw - 22px);
+        max-width: none;
+        height: min(520px, calc(100vh - 100px));
+    }
+}
