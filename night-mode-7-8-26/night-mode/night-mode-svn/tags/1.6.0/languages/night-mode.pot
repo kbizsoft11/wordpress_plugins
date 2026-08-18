@@ -1,0 +1,57 @@
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Night Mode\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-12-30 10:46+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: \n"
+"Language: \n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Loco https://localise.biz/\n"
+"X-Loco-Version: 2.3.1; wp-5.2.5"
+
+#: change_color.php:19
+msgid "translate text"
+msgstr ""
+
+#: change_color.php:27
+msgctxt "रात मोड सेटिंग"
+msgid "Night Mode Setting"
+msgstr ""
+
+#: change_color.php:31
+msgid "Background Color"
+msgstr ""
+
+#: change_color.php:35
+msgid "Text Color"
+msgstr ""
+
+#: change_color.php:39
+msgid "Anchor Color"
+msgstr ""
+
+#. Name of the plugin
+msgid "Night Mode"
+msgstr ""
+
+#. Description of the plugin
+msgid "This is for change the admin end color with text."
+msgstr ""
+
+#. URI of the plugin
+msgid "https://wordpress.org/plugins/night-mode/"
+msgstr ""
+
+#. Author of the plugin
+msgid "Raj"
+msgstr ""
+
+#. Author URI of the plugin
+msgid "http://www.kbizsoft.com"
+msgstr ""
