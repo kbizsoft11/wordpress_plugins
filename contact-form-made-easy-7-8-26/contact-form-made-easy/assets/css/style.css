@@ -1,0 +1,20 @@
+/* admin menu icon image*/
+img {
+    border: none;
+    width: 35px;
+    margin-top: -10px;
+}
+
+/* export button div */
+.export_button{
+	width: 100%;
+}
+
+#export_list{
+	float: right;
+	margin: 10px;
+}
+
+.custom_pagination {
+    float: right;
+}
